@@ -1,4 +1,4 @@
-# Kubernetes tutorial
+# Kubernetes tutorial and building data-centric cluster
 
 * From: [https://youtu.be/s_o8dwzRlu4?si=WPX_LFJVTE4SCipJ](https://youtu.be/s_o8dwzRlu4?si=WPX_LFJVTE4SCipJ)
 * Repo: [https://gitlab.com/nanuchi/k8s-in-1-hour](https://gitlab.com/nanuchi/k8s-in-1-hour)
@@ -236,5 +236,47 @@ kubectl delete services --all
 kubectl delete deployments --all
 
 minikube stop
+```
+
+
+## 3. Building a data-centric cluster
+
+### 3.1. MongoDB
+
+Using same config
+
+```bash
+minikube start
+kubectl get all
+kubectl apply -f 
+```
+
+### 3.2. Spark
+
+* [https://www.youtube.com/watch?v=RRQ3kn-WA7o&ab_channel=Spot](https://www.youtube.com/watch?v=RRQ3kn-WA7o&ab_channel=Spot)
+* [https://github.com/GoogleCloudPlatform/spark-on-k8s-operator](https://github.com/GoogleCloudPlatform/spark-on-k8s-operator)
+  
+```bash
+curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3
+chmod 700 get_helm.sh
+./get_helm.sh
+
+minikube start
+kubectl get all
+
+
+helm repo add spark-operator https://googlecloudplatform.github.io/spark-on-k8s-operator
+helm install my-release spark-operator/spark-operator --namespace spark-operator --create-namespace
+
+# Check if the Spark Operator pod is running
+kubectl get pods -n spark-operator
+
+# Create a Spark job using a SparkApplication YAML file
+# Note: Replace 'spark-app.yaml' with your actual SparkApplication YAML file
+kubectl apply -f spark-app.yaml -n spark-operator
+
+# Check the status of the Spark job
+kubectl get sparkapplications -n spark-operator
+
 
 ```
