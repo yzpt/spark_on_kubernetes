@@ -1,6 +1,7 @@
 # Kubernetes tutorial
 
-* From [https://youtu.be/s_o8dwzRlu4?si=WPX_LFJVTE4SCipJ](https://youtu.be/s_o8dwzRlu4?si=WPX_LFJVTE4SCipJ)
+* From: [https://youtu.be/s_o8dwzRlu4?si=WPX_LFJVTE4SCipJ](https://youtu.be/s_o8dwzRlu4?si=WPX_LFJVTE4SCipJ)
+* Repo: [https://gitlab.com/nanuchi/k8s-in-1-hour](https://gitlab.com/nanuchi/k8s-in-1-hour)
 
 ## 1. miniKube & kubectl
 
@@ -33,14 +34,14 @@ kubectl get pod -A
 <details>
 <summary>mongo-config.yaml</summary>
 
-    ```yaml
-    apiVersion: v1
-    kind: ConfigMap
-    metadata:
-      name: mongo-config
-    data:
-      mongo-url: mongo-service
-    ```
+  ```yaml
+  apiVersion: v1
+  kind: ConfigMap
+  metadata:
+    name: mongo-config
+  data:
+    mongo-url: mongo-service
+  ```
 </details>
 
 #### 2.1.2. Secret
@@ -50,16 +51,16 @@ kubectl get pod -A
 <details>
 <summary>mongo-secret.yaml</summary>
 
-    ```yaml
-    apiVersion: v1
-    kind: Secret
-    metadata:
-      name: mongo-secret
-    type: Opaque
-    data:
-      mongo-user: bW9uZ291c2VyCg==          # base64 encoded string for "mongouser"
-      mongo-password: bW9uZ29wYXNzd29yZAo=  # base64 encoded string for "mongopassword"
-    ```
+  ```yaml
+  apiVersion: v1
+  kind: Secret
+  metadata:
+    name: mongo-secret
+  type: Opaque
+  data:
+    mongo-user: bW9uZ291c2VyCg==          # base64 encoded string for "mongouser"
+    mongo-password: bW9uZ29wYXNzd29yZAo=  # base64 encoded string for "mongopassword"
+  ```
 </details>
 
 #### 2.1.3. Deployment & Service
@@ -187,7 +188,21 @@ kubectl apply -f mongo-config.yaml
 kubectl apply -f mongo-secret.yaml
 kubectl apply -f mongo.yaml
 kubectl apply -f webapp.yaml
+
+kubectl get all
+kubectl get all -o wide
+
+# kubectl stop
+kubectl delete -f mongo-config.yaml
+kubectl delete -f mongo-secret.yaml
+kubectl delete -f mongo.yaml
+kubectl delete -f webapp.yaml
+
+kubectl get all
 ```
 
 ## 2.3. Interacting
 
+```bash
+allo
+```
