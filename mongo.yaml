@@ -5,7 +5,7 @@ metadata:
   labels:
     app: mongo
 spec:
-  replicas: 1 # because it's database
+  replicas: 1
   selector:
     matchLabels:
       app: mongo
@@ -29,9 +29,7 @@ spec:
           valueFrom:
             secretKeyRef:
               name: mongo-secret
-              key: mongo-password
-           
-
+              key: mongo-password  
 ---
 apiVersion: v1
 kind: Service
