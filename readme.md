@@ -15,29 +15,6 @@ sudo install minikube-linux-amd64 /usr/local/bin/minikube
 # start Minikube and check status
 minikube start
 minikube status
-
-# get minikube node's ip address
-minikube ip
-
-# get basic info about k8s components
-kubectl get node
-kubectl get pod
-kubectl get svc
-kubectl get all
-
-# get extended info about components
-kubectl get pod -o wide
-kubectl get node -o wide
-
-# get detailed info about a specific component
-kubectl describe svc $SVC_NAME
-kubectl describe pod $POD_NAME
-
-# get application logs
-kubectl logs $POD_NAME
-
-# stop your Minikube cluster
-minikube stop
 ```
 
 ## 2. Deploying a webApp
@@ -210,16 +187,43 @@ kubectl apply -f webapp.yaml
 kubectl get all
 kubectl get all -o wide
 
+# go to webapp service:
 # ⚠ Known issue - Minikube IP not accessible
 # If you can't access the NodePort service webapp with MinikubeIP:NodePort, execute the following command:
 minikube service webapp-service
 
 ```
 
-## 2.3. Cleaning
+## 2.3. Interacting
 
 ```bash
-# kubectl stop
+# get minikube node's ip address
+minikube ip
+
+# get basic info about k8s components
+kubectl get node
+kubectl get pod
+kubectl get svc
+kubectl get all
+
+# get extended info about components
+kubectl get pod -o wide
+kubectl get node -o wide
+
+# get detailed info about a specific component
+kubectl describe svc $SVC_NAME
+kubectl describe pod $POD_NAME
+
+# get application logs
+kubectl logs $POD_NAME
+
+# stop your Minikube cluster
+minikube stop
+```
+
+## 2.4. Cleaning
+
+```bash
 kubectl delete -f mongo-config.yaml
 kubectl delete -f mongo-secret.yaml
 kubectl delete -f mongo.yaml
@@ -230,12 +234,7 @@ kubectl get all
 kubectl delete pods --all
 kubectl delete services --all
 kubectl delete deployments --all
+
 minikube stop
 
-```
-
-## 2.3. Interacting
-
-```bash
-allo
 ```
